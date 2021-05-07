@@ -26,7 +26,7 @@ matrix:
             - valgrind
             - lcov
       env:
-	- COMPILER=g++-6
+        - COMPILER=g++-6
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 before_install:
