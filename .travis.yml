@@ -30,7 +30,6 @@ matrix:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 before_install:
-  - apt-get update
   - export CMAKE_OPTIONS=${CMAKE_OPTIONS}" "${ENV_CMAKE_OPTIONS}
   - export CXX_FLAGS=${CXX_FLAGS}" "${ENV_CXX_FLAGS}
 
