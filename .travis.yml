@@ -1,5 +1,5 @@
 # Use new trusty images, should yield newer compilers and packages
-dist: precise
+dist: xenial
 language: cpp
 
 env:
