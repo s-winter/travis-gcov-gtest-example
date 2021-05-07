@@ -1,6 +1,7 @@
 # Use new trusty images, should yield newer compilers and packages
 dist: xenial
 language: cpp
+compiler: g++
 
 env:
   global:
@@ -19,15 +20,17 @@ matrix:
       addons:
         apt:
           sources:
-            # - ubuntu-toolchain-r-test
+            - ubuntu-toolchain-r-test
           packages:
             - g++-6
             - valgrind
             - lcov
-      env: COMPILER=g++-6
+      env:
+	- COMPILER=g++-6
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 before_install:
-  - sudo apt-get update
+  - apt-get update
   - export CMAKE_OPTIONS=${CMAKE_OPTIONS}" "${ENV_CMAKE_OPTIONS}
   - export CXX_FLAGS=${CXX_FLAGS}" "${ENV_CXX_FLAGS}
 
