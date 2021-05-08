@@ -58,4 +58,4 @@ script:
   - ../get_code_cov.sh
 
 after_success:
-    - codecov -t 1338975a-3e8b-42aa-aece-996bf53ca1ff
+    - codecov --token=:1338975a-3e8b-42aa-aece-996bf53ca1ff
