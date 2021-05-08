@@ -9,7 +9,7 @@ env:
     - LINUX_DIST=xenial
     - DEPS_DIR=${TRAVIS_BUILD_DIR}/deps
     # Global build options and C++ flags
-    - CXX_FLAGS="-Wall -pedantic -Werror -Wno-variadic-macros -Wno-long-long -Wno-shadow"
+    - CXX_FLAGS="-Wall -pedantic -Werror -Wno-variadic-macros -Wno-long-long -Wno-shadow -fprofile-arcs -ftest-coverage"
     # Misc
     - RUN_TESTS=true
     - COVERAGE=false
@@ -30,12 +30,12 @@ matrix:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 before_install:
+  - sudo pip install codecov
   - export CMAKE_OPTIONS=${CMAKE_OPTIONS}" "${ENV_CMAKE_OPTIONS}
   - export CXX_FLAGS=${CXX_FLAGS}" "${ENV_CXX_FLAGS}
 
 install:
-    - sudo pip install codecov
-    # Download and install recent cmake
+    # Download and install cmake
     - |
       if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
         CMAKE_URL="http://www.cmake.org/files/v3.5/cmake-3.5.1-Linux-x86_64.tar.gz"
@@ -55,6 +55,7 @@ script:
   - cd build
   - cmake ${CMAKE_OPTIONS} -DCMAKE_CXX_FLAGS=${CXX_FLAGS} -DCMAKE_CXX_COMPILER=$COMPILER -DCMAKE_BUILD_TYPE=ON -DBUILD_TESTS=ON .. && make
   - make test
+  - ../get_code_cov.sh
 
 after_success:
-    - codecov -t 14941eb5-212f-45d2-8f93-b00e31f7ea8f -X gcov
+    - codecov -t 1338975a-3e8b-42aa-aece-996bf53ca1ff
